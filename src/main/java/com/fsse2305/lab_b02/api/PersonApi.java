@@ -2,16 +2,17 @@ package com.fsse2305.lab_b02.api;
 
 import com.fsse2305.lab_b02.data.CreatePersonData;
 import com.fsse2305.lab_b02.data.CreatedPersonData;
+import com.fsse2305.lab_b02.data.UpdatePersonData;
+import com.fsse2305.lab_b02.data.UpdatedPersonData;
 import com.fsse2305.lab_b02.data.dto.CreatePersonRequestDto;
 import com.fsse2305.lab_b02.data.dto.CreatePersonResponseDto;
+import com.fsse2305.lab_b02.data.dto.UpdatePersonRequestDto;
+import com.fsse2305.lab_b02.data.dto.UpdatePersonResponseDto;
 import com.fsse2305.lab_b02.data.entity.PersonEntity;
 import com.fsse2305.lab_b02.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.GsonBuilderUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -54,6 +55,16 @@ public class PersonApi {
     @GetMapping("/person")
     public List<PersonEntity> getPerson(){
         return personService.getPerson();
+    }
+
+    @PutMapping("/person")
+    public UpdatePersonResponseDto updatePerson(@RequestBody UpdatePersonRequestDto updatePersonRequestDto){
+        UpdatePersonData updatePersonData = new UpdatePersonData(updatePersonRequestDto);
+        UpdatedPersonData updatedPersonData = personService.updatePerson(updatePersonData);
+
+        UpdatePersonResponseDto updatePersonResponseDto = new UpdatePersonResponseDto(updatedPersonData);
+        return updatePersonResponseDto;
+
     }
 
 
