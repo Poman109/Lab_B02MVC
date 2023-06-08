@@ -1,17 +1,16 @@
 package com.fsse2305.lab_b02.data;
 
-import com.fsse2305.lab_b02.data.dto.DeletePersonRequestDto;
+import com.fsse2305.lab_b02.data.entity.PersonEntity;
 
-public class DeletePersonData {
+public class DeletedPersonData {
     private String lastName;
     private String firstName;
     private String hkid;
 
-    public DeletePersonData(DeletePersonRequestDto deletePersonRequestDto){
-        this.lastName = deletePersonRequestDto.getLastName();
-        this.firstName = deletePersonRequestDto.getFirstName();
-        this.hkid = deletePersonRequestDto.getHkid();
-
+    public DeletedPersonData(PersonEntity personEntity){
+        this.lastName = personEntity.getLastName();
+        this.firstName = personEntity.getFirstName();
+        this.hkid = personEntity.getHkid();
     }
 
     public String getLastName() {
