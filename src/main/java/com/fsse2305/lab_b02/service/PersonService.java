@@ -40,4 +40,9 @@ public class PersonService implements PersonServiceImpl {
 
     }
 
+    @Override
+    public List<PersonEntity> getPerson(){
+        return personEntityList;
+    }
+
 }

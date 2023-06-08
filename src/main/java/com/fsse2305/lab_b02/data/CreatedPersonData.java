@@ -16,9 +16,6 @@ public class CreatedPersonData {
  }
 
 
-
-
-
     public String getLastName() {
         return lastName;
     }

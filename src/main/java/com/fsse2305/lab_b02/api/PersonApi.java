@@ -4,12 +4,17 @@ import com.fsse2305.lab_b02.data.CreatePersonData;
 import com.fsse2305.lab_b02.data.CreatedPersonData;
 import com.fsse2305.lab_b02.data.dto.CreatePersonRequestDto;
 import com.fsse2305.lab_b02.data.dto.CreatePersonResponseDto;
+import com.fsse2305.lab_b02.data.entity.PersonEntity;
 import com.fsse2305.lab_b02.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
 
 @RestController
 public class PersonApi {
@@ -45,6 +50,15 @@ public class PersonApi {
         return createPersonResponseDto;
 
     }
+
+    @GetMapping("/person")
+    public List<PersonEntity> getPerson(){
+        return personService.getPerson();
+    }
+
+
+
+
 
 
 
