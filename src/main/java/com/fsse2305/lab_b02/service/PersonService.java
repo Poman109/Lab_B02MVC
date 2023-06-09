@@ -39,10 +39,7 @@ public class PersonService implements PersonServiceImpl {
 
     }
 
-    @Override
-    public List<PersonEntity> getPerson(){
-        return personEntityList;
-    }
+
 
     @Override
     public UpdatedPersonData updatePerson(UpdatePersonData updatePersonData){
@@ -80,6 +77,28 @@ public class PersonService implements PersonServiceImpl {
         throw new NotFoundPeopleException();
     }
 
+    @Override
+    public List<GetAllPersonData> getPerson() {
+        List<GetAllPersonData> getAllPeopleList = new ArrayList<>();
+        for (PersonEntity personEntity : personEntityList){
+            GetAllPersonData getAllPersonData = new GetAllPersonData(personEntity);
+            getAllPeopleList.add(getAllPersonData);
+        }
+        return getAllPeopleList;
+    }
+
+    public List<GotPersonByLastNameData> getPersonByLastname(GetPersonByLastNameData getPersonByLastNameData){
+        List<GotPersonByLastNameData> gotPersonByLastNameDataArrayList = new ArrayList<>();
+        for(PersonEntity personEntity2 : personEntityList) {
+            if (!personEntity2.getLastName().equals(getPersonByLastNameData.getLastName())) {
+                continue;
+            }
+            GotPersonByLastNameData gotPersonByLastNameData = new GotPersonByLastNameData(personEntity2);
+            gotPersonByLastNameDataArrayList.add(gotPersonByLastNameData);
+        }
+            return gotPersonByLastNameDataArrayList;
+
+    }
 
 
 }

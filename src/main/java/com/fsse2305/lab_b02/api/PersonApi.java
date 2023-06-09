@@ -5,9 +5,9 @@ import com.fsse2305.lab_b02.data.dto.*;
 import com.fsse2305.lab_b02.data.entity.PersonEntity;
 import com.fsse2305.lab_b02.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -47,8 +47,15 @@ public class PersonApi {
     }
 
     @GetMapping("/person")
-    public List<PersonEntity> getPerson(){
-        return personService.getPerson();
+    public List<GetAllPersonResponseDto> getPerson(){
+
+       List<GetAllPersonData> getAllPersonDataDatalist = personService.getPerson();
+       List<GetAllPersonResponseDto> getAllPersonResponseDtoList = new ArrayList<>();
+       for (GetAllPersonData getAllPersonData : getAllPersonDataDatalist){
+          GetAllPersonResponseDto getAllPersonResponseDto = new GetAllPersonResponseDto(getAllPersonData);
+          getAllPersonResponseDtoList.add(getAllPersonResponseDto);
+       }
+       return getAllPersonResponseDtoList;
     }
 
     @PutMapping("/person")
@@ -57,6 +64,8 @@ public class PersonApi {
         UpdatedPersonData updatedPersonData = personService.updatePerson(updatePersonData);
 
         UpdatePersonResponseDto updatePersonResponseDto = new UpdatePersonResponseDto(updatedPersonData);
+
+
         return updatePersonResponseDto;
 
     }
@@ -70,6 +79,24 @@ public class PersonApi {
         return deletePersonResponseDto;
 
     }
+
+    @GetMapping("/person/{last_name}")
+    public List<GetPersonLastNameResponseDto> getPersonByLastName(@PathVariable String last_name){
+        GetPersonByLastNameData getPersonByLastNameData = new GetPersonByLastNameData(last_name);
+        List<GotPersonByLastNameData> gotPersonByLastNameDataArray = personService.getPersonByLastname(getPersonByLastNameData);
+
+        List<GetPersonLastNameResponseDto> getPersonLastNameResponseDtoList = new ArrayList<>();
+        for(GotPersonByLastNameData gotPersonByLastNameData: gotPersonByLastNameDataArray) {
+            GetPersonLastNameResponseDto getPersonLastNameResponseDto = new GetPersonLastNameResponseDto(gotPersonByLastNameData);
+            getPersonLastNameResponseDtoList.add(getPersonLastNameResponseDto);
+        }
+
+        return getPersonLastNameResponseDtoList;
+
+
+    }
+
+
 
 
 

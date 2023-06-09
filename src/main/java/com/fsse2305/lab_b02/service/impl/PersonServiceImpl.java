@@ -9,7 +9,7 @@ public interface PersonServiceImpl {
 
     CreatedPersonData createPerson(CreatePersonData createPersonData);
 
-    List<PersonEntity> getPerson();
+    List<GetAllPersonData> getPerson();
 
     UpdatedPersonData updatePerson(UpdatePersonData updatePersonData);
 
