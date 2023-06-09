@@ -11,7 +11,7 @@ public interface PersonServiceImpl {
 
     List<GetAllPersonData> getPerson();
 
-    UpdatedPersonData updatePerson(UpdatePersonData updatePersonData);
+    List<UpdatedPersonData> updatePerson(UpdatePersonData updatePersonData);
 
     DeletedPersonData deletePerson(DeletePersonData deletePersonData);
 }

@@ -42,9 +42,9 @@ public class PersonService implements PersonServiceImpl {
 
 
     @Override
-    public UpdatedPersonData updatePerson(UpdatePersonData updatePersonData){
+    public List<UpdatedPersonData> updatePerson(UpdatePersonData updatePersonData){
 //        for(int i=0; i<personEntityList.size();i++ )
-
+        List<UpdatedPersonData> updatedPersonDataArray = new ArrayList<>();
         for(PersonEntity personEntity1 : personEntityList){
             if (!personEntity1.getHkid().equals(updatePersonData.getHkid())){
                 continue;
@@ -53,18 +53,17 @@ public class PersonService implements PersonServiceImpl {
             personEntity1.setFirstName(updatePersonData.getFirstName());
 
             UpdatedPersonData updatedPersonData = new UpdatedPersonData(personEntity1);
-
-
-            return updatedPersonData;
+            updatedPersonDataArray.add(updatedPersonData);
 
         }
-        throw new NotFoundPeopleException();
+        return updatedPersonDataArray;
 
     }
 
 
     @Override
-    public DeletedPersonData deletePerson(DeletePersonData deletePersonData){
+    public List<DeletedPersonData> deletePerson(DeletePersonData deletePersonData){
+        
         for(PersonEntity personEntity1 : personEntityList){
             if(!personEntity1.getHkid().equals(deletePersonData.getHkid())){
                 continue;
@@ -74,7 +73,7 @@ public class PersonService implements PersonServiceImpl {
             return  deletedPersonData;
         }
 
-        throw new NotFoundPeopleException();
+
     }
 
     @Override

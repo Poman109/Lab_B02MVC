@@ -59,14 +59,18 @@ public class PersonApi {
     }
 
     @PutMapping("/person")
-    public UpdatePersonResponseDto updatePerson(@RequestBody UpdatePersonRequestDto updatePersonRequestDto){
+    public List<UpdatePersonResponseDto> updatePerson(@RequestBody UpdatePersonRequestDto updatePersonRequestDto){
         UpdatePersonData updatePersonData = new UpdatePersonData(updatePersonRequestDto);
-        UpdatedPersonData updatedPersonData = personService.updatePerson(updatePersonData);
+        List<UpdatedPersonData> updatedPersonDataArray = personService.updatePerson(updatePersonData);
 
-        UpdatePersonResponseDto updatePersonResponseDto = new UpdatePersonResponseDto(updatedPersonData);
+        List<UpdatePersonResponseDto> updatePersonResponseDtoArray = new ArrayList<>();
+        for(UpdatedPersonData updatedPersonData : updatedPersonDataArray  ){
+            UpdatePersonResponseDto updatePersonResponseDto = new UpdatePersonResponseDto(updatedPersonData);
+
+        }
 
 
-        return updatePersonResponseDto;
+        return updatePersonResponseDtoArray;
 
     }
 
@@ -81,6 +85,7 @@ public class PersonApi {
     }
 
     @GetMapping("/person/{last_name}")
+    @ResponseBody
     public List<GetPersonLastNameResponseDto> getPersonByLastName(@PathVariable String last_name){
         GetPersonByLastNameData getPersonByLastNameData = new GetPersonByLastNameData(last_name);
         List<GotPersonByLastNameData> gotPersonByLastNameDataArray = personService.getPersonByLastname(getPersonByLastNameData);
